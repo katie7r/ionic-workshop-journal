@@ -49,6 +49,7 @@ angular.module('starter.controllers', [])
   $scope.cancelEntryModal = function() {
     $scope.modal.hide();
     $scope.entry = {};
+    $scope.journal = Journal.refresh();
   };
 
   $scope.remove = function(entry) {

@@ -11,12 +11,18 @@ angular.module('starter.services', [])
   ];
 
   // If we have a journal object, use that!
-  if (localStorage.journal)
-    journal = JSON.parse(localStorage.journal);
+  // Added to function for use at both initialization
+  // and later to be able to refresh the journal
+  var loadJournal = function() {
+    if (localStorage.journal)
+      journal = JSON.parse(localStorage.journal);
+  };
 
   var save = function() {
     localStorage.journal = JSON.stringify(journal);
   };
+
+  loadJournal();
 
   return {
     all: function() {
@@ -50,6 +56,10 @@ angular.module('starter.services', [])
         }
       }
       return null;
+    },
+    refresh: function() {
+      loadJournal();
+      return journal;
     }
   };
 })
