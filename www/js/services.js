@@ -4,6 +4,7 @@ angular.module('starter.services', [])
   // Give us an example object
   var journal = [
     {
+      "id": 1,
       "title": "My 1st Entry",
       "content": "This is a sample entry."
     }
@@ -34,6 +35,10 @@ angular.module('starter.services', [])
       return null;
     },
     add: function(entry) {
+      // Assumes entries are ordered by id (asc) and
+      // will reuse ids when last entries are removed,
+      // but at least addresses duplicates and removal
+      entry.id = journal[journal.length - 1].id + 1
       journal.push(entry);
       save();
     }
