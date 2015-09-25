@@ -1,6 +1,6 @@
 <div class="modal">
     <ion-header-bar>
-        <h1 class="title">Add Entry</h1>
+        <h1 class="title">{{entry.id ? 'Update' : 'Add'}} Entry</h1>
     </ion-header-bar>
 
     <ion-content has-bouncing="false">
@@ -21,6 +21,6 @@
                 <button class="button button-full button-royal" ng-click="closeEntryModal(entry)">Done</button>
             </div>
         </div>
-        
+
     </ion-content>
 </div>

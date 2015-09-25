@@ -1,5 +1,5 @@
 <ion-view view-title="Journal">
-    
+
     <ion-nav-buttons side="right">
         <button class="button button-clear icon ion-ios-plus-outline" ng-click="showEntryModal()"></button>
     </ion-nav-buttons>
@@ -7,7 +7,7 @@
   <ion-content class="padding">
 
     <ion-list>
-        <ion-item class="item-remove-animate item-icon-right" ng-repeat="entry in journal track by entry.title" type="item-text-wrap">
+        <ion-item class="item-remove-animate item-icon-right" ng-repeat="entry in journal track by entry.id" type="item-text-wrap" ng-click="showEntryModal(entry)">
             <h2>{{entry.title}}</h2>
             <p>{{entry.content}}</p>
             <i class="icon ion-chevron-right icon-accessory"></i>

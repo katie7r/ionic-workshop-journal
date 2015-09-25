@@ -4,18 +4,25 @@ angular.module('starter.services', [])
   // Give us an example object
   var journal = [
     {
+      "id": 1,
       "title": "My 1st Entry",
       "content": "This is a sample entry."
     }
   ];
 
   // If we have a journal object, use that!
-  if (localStorage.journal)
-    journal = JSON.parse(localStorage.journal);
+  // Added to function for use at both initialization
+  // and later to be able to refresh the journal
+  var loadJournal = function() {
+    if (localStorage.journal)
+      journal = JSON.parse(localStorage.journal);
+  };
 
   var save = function() {
     localStorage.journal = JSON.stringify(journal);
   };
+
+  loadJournal();
 
   return {
     all: function() {
@@ -34,8 +41,25 @@ angular.module('starter.services', [])
       return null;
     },
     add: function(entry) {
+      // Assumes entries are ordered by id (asc) and
+      // will reuse ids when last entries are removed,
+      // but at least addresses duplicates and removal
+      entry.id = journal[journal.length - 1].id + 1
       journal.push(entry);
       save();
+    },
+    update: function(entry) {
+      for (var i = 0; i < journal.length; i++) {
+        if (journal[i].id == entry.id) {
+          journal[i] = entry;
+          save();
+        }
+      }
+      return null;
+    },
+    refresh: function() {
+      loadJournal();
+      return journal;
     }
   };
 })
