@@ -23,7 +23,7 @@ angular.module('starter.controllers', [])
   $scope.closeEntryModal = function(entry) {
 
     // Make sure we have form data, then hide/save/clear form
-    if (angular.isDefined(entry.title) && angular.isDefined(entry.content)) {
+    if (angular.isDefined(entry.title) && entry.title.length && angular.isDefined(entry.content) && entry.content.length) {
       $scope.modal.hide();
       if (angular.isDefined(entry.id)) {
         Journal.update(entry);
