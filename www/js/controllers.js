@@ -14,7 +14,9 @@ angular.module('starter.controllers', [])
     $scope.modal = modal;
   });
 
-  $scope.showEntryModal = function() {
+  $scope.showEntryModal = function(entry) {
+    // Allow use of modal for adding or updating entries
+    $scope.entry = entry || {}
     $scope.modal.show();
   };
 
@@ -23,7 +25,12 @@ angular.module('starter.controllers', [])
     // Make sure we have form data, then hide/save/clear form
     if (angular.isDefined(entry.title) && angular.isDefined(entry.content)) {
       $scope.modal.hide();
-      Journal.add(entry);
+      if (angular.isDefined(entry.id)) {
+        Journal.update(entry);
+      }
+      else {
+        Journal.add(entry);
+      };
       $scope.entry = {};
     }
     // Don't allow an incomplete form!

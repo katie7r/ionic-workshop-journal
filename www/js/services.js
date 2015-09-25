@@ -41,6 +41,15 @@ angular.module('starter.services', [])
       entry.id = journal[journal.length - 1].id + 1
       journal.push(entry);
       save();
+    },
+    update: function(entry) {
+      for (var i = 0; i < journal.length; i++) {
+        if (journal[i].id == entry.id) {
+          journal[i] = entry;
+          save();
+        }
+      }
+      return null;
     }
   };
 })
